@@ -16,3 +16,15 @@ fs.appendFileSync("some-file.txt",
 
 console.log(textThatWasReadFromFile);
 
+
+// To create file
+fs.writeFileSync("repeat.txt", "Class assigment", "utf8");
+
+// To read file
+var loopText = fs.readFileSync("repeat.txt", "utf8");
+
+// to add text
+fs.appendFileSync("repeat.txt", " This is a loop for repeat txt file.", "utf8");
+
+console.log(loopText);
+
