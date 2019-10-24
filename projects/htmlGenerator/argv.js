@@ -6,3 +6,4 @@ console.log(terminalText);
 console.log("custome text only:");
 console.log(terminalText[2]);
 console.log(terminalText[3]);
+console.log(terminalText[4]);
