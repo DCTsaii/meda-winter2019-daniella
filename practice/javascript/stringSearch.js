@@ -6,7 +6,7 @@ var terminalArguments = process.argv;
 // console.log(terminalArguments);
 
 // to run this program in the terminal type: node stringSearch.js "your string here with quotes" e <-- the letter you want to search
-
+// to run this program in the terminal type: node stringSearch.js filename.txt e <-- the letter you want to search
 
 // to read the file in the terminal
 var textFromFile = fs.readFileSync(terminalArguments[2], "utf8");
