@@ -1,1 +1,1 @@
-{"mainKey":106,"isThisTrue":true,"someText":"some Text!","arrays":[100,"string",false],"childObject":{"nestedKey":"inside"},"mainkey2":120}
+{"aKey":360,"aBoolean":true,"aText":"some Text!","arrays":[100,"string",false],"childObject":{"nestedKey":"inside"},"mainKey":106,"mainkey2":120}
