@@ -105,6 +105,7 @@ class Employee {
     // Getters and Setters END
 
     goHomeAndSleep(){
+        console.log(this.firstName + " went home to sleep");
         this.timesheet = this.originalTime;
     }
 
