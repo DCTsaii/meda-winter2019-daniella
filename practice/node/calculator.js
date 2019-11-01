@@ -1,7 +1,7 @@
 // Renaming ARGV array for easier reading.
 // When using ARGV, start with index 2, because 0 and 1 are not useful in or code.
 
-// ALTERNATIVE You can write 2x terminalArguments.shift() to start at index 0. Exanple bellow:
+// ALTERNATIVE You can write 2x terminalArguments.shift() to start at index 0. Example bellow:
 // terminalArguments.shif()
 // terminalArguments.shif()
 
@@ -23,7 +23,7 @@ var terminalArguments = process.argv;
 
 // Warns user that we can only use the first two numbers.
     if (terminalArguments[5] != undefined) {
-        console.log("Unfortunately this program can only use the first two numbers. Subcribe for future updates.")
+        console.log("Unfortunately this program can only use the first two numbers. Subscribe for future updates.")
     }
 
 
@@ -39,7 +39,7 @@ var terminalArguments = process.argv;
 var number1 = parseInt(terminalArguments[2]);
 // This is the second number in the calculator, it's index 4
 var number2 = parseInt(terminalArguments[4]);    
-// Safe to use number1, and number2 as they are Number Datatypes.
+// Safe to use number1, and number2 as they are Number Datatype.
 
 // Decide what we want to do with these numbers. Create a IF statement to compare so it will ONLY run based on which operator you pick.
 if (terminalArguments[4] == undefined){
@@ -61,7 +61,7 @@ if (terminalArguments[4] == undefined){
 } else if (terminalArguments[3] == "remainder"){
     modulate(number1, number2);
 
-// This ELSE statement will run if you mispelled the operator.
+// This ELSE statement will run if you misspelled the operator.
 } else {
     console.log("Sorry, we did not understand the operator you requested.")
 }
@@ -76,7 +76,7 @@ function add(num1, num2) {
 
 
 // Create divide, multiply, subtract, and remainder functions.
-// To create the remaining to your calculater, modify the function add to: divide, multiply, subtract and modulate. Example bellow:
+// To create the remaining to your calculator, modify the function add to: divide, multiply, subtract and modulate. Example bellow:
 
 function subtract(num1, num2) {
     var difference = num1 - num2;

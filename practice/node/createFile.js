@@ -18,7 +18,7 @@ console.log(textThatWasReadFromFile);
 
 
 // To create file
-fs.writeFileSync("repeat.txt", "Class assigment", "utf8");
+fs.writeFileSync("repeat.txt", "Class assignment", "utf8");
 
 // To read file
 var loopText = fs.readFileSync("repeat.txt", "utf8");
