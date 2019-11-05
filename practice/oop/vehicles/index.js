@@ -15,3 +15,7 @@ honda.travel(100);
 honda.travel(100);
 honda.travel(100);
 honda.travel(100);
+
+
+honda.refuel(10); // filled with 10 gallons
+honda.travel(50); // travel 50 miles after refilling

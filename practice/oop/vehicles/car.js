@@ -34,6 +34,26 @@ const Car = class Car extends Vehicle {
         // toFixed(2) is to keep 2 decimals. Example: this.currentFuel.toFixed(1)
     }
 
+    refuel(gallons) {
+
+        if(gallons <= 0) {
+            console.log("You need to provide fuel (positive number).");
+            return 1; // If you did not refuel properly
+        } else {
+            if(gallons >= this.tankSize) {
+                console.log("You provided too much fuel, cannot fit into tank.");
+            } else {
+                // This checks how much free space we have in the gallon
+                if(this.tankSize - this.currentFuel < gallons) {
+                    console.log("There is not enough free space in the fuel tank to add that many gallons.");
+                } else {
+                    this.currentFuel = this.currentFuel + gallons;
+                    console.log(this.model + " was successfully refueled with" + gallons + " gallons of gas.");
+                };
+            }
+        }
+    }
+
 }
 
 module.exports = Car;
