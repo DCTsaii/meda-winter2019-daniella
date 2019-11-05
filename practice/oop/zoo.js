@@ -81,7 +81,23 @@ class Mammal extends Animal{
   die(){
       console.log(this.type + " has lived a full life.");
   }
+
+  // Not the best way to use get and set examples: Start
+  get age(){
+    return this.age
 }
+
+set age(age){
+    this.age = age
+}
+setAge(age, arg2){
+
+} 
+// End
+
+}
+
+
 
 // CREATING A DOG
 // Use const here because you don't want to change the datatype here Mammal
@@ -126,3 +142,10 @@ litter[1].live(20);
 // New Fish Object
 let tilapia = new Fish(true);
 console.log(tilapia.metabolism);
+
+
+// Not the best way to use this.You're accessing a property
+firstCatMammal.age;
+firstCatMammal.age = 10;
+
+firstCatMammal.setAge(10, true);

@@ -16,11 +16,24 @@ const Car = class Car extends Vehicle {
 
     // This is a method
     travel(miles){
-        this.currentFuel = this.currentFuel - (miles / this.MPG);
-        console.log("The " + this.make + " " + this.model + " has " + this.currentFuel.toFixed(1) + " gallon of " + this.engineType + " left.") 
+
+        if(this.currentFuel >= 0){
+
+            if(this.currentFuel * this.MPG >= miles) {
+                this.currentFuel = this.currentFuel - (miles / this.MPG);
+                console.log("The " + this.make + " " + this.model + " has " + this.currentFuel.toFixed(1) + " gallon of " + this.engineType + " left.")
+            } else {
+                console.log("The " + this.make + " " + this.model + " doesn't have enough fuel to travel that far.");
+            }
+
+        } else {
+               console.log("The " + this.make + " " + this.model + " has no gas.");
+        }
+         
         // Math.floor get rid of decimals. Example: Math.floor(this.currentFuel)
         // toFixed(2) is to keep 2 decimals. Example: this.currentFuel.toFixed(1)
     }
+
 }
 
 module.exports = Car;
