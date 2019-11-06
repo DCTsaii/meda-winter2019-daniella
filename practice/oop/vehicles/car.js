@@ -2,6 +2,7 @@
 // Accessing vehicle.js file
 const Vehicle = require("./vehicle.js");
 
+// You can also write module.exports = const Car = class Car extends Vehicle {}
 const Car = class Car extends Vehicle {
     // the orders inside the constructor parameters must be the SAME order in the index.js file
     constructor(owner, make, model, year, color, license, mileage, mpg, tankSize, engineType, topSpeed) {
@@ -24,10 +25,12 @@ const Car = class Car extends Vehicle {
                 console.log("The " + this.make + " " + this.model + " has " + this.currentFuel.toFixed(1) + " gallon of " + this.engineType + " left.")
             } else {
                 console.log("The " + this.make + " " + this.model + " doesn't have enough fuel to travel that far.");
+                this.refuel(1);
             }
 
         } else {
                console.log("The " + this.make + " " + this.model + " has no gas.");
+               this.refuel(1)
         }
          
         // Math.floor get rid of decimals. Example: Math.floor(this.currentFuel)
@@ -46,12 +49,18 @@ const Car = class Car extends Vehicle {
                 // This checks how much free space we have in the gallon
                 if(this.tankSize - this.currentFuel < gallons) {
                     console.log("There is not enough free space in the fuel tank to add that many gallons.");
+                    return 1; // return 1 means failed
                 } else {
                     this.currentFuel = this.currentFuel + gallons;
-                    console.log(this.model + " was successfully refueled with" + gallons + " gallons of gas.");
+                    console.log(this.model + " was successfully refueled with " + gallons + " gallons of gas.");
+                    return 0; // return 0 means successfully
                 };
             }
         }
+        
+    }
+    speak(){
+        console.log("This is a car object.");
     }
 
 }

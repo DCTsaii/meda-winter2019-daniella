@@ -10,8 +10,25 @@ const Vehicle = class Vehicle {
         this.owner = owner;
         console.log("New vehicle was created.");
     }
+    
+    // Overriding example
+    speak(){
+        console.log("This is a vehicle object.");
+    }
 
 
 }
 // To export the class use module.exports
 module.exports = Vehicle;
+
+// Example of no such thing as Overload in Javascript 
+// arg1 = argument 
+/*
+function myFunction(){
+    console.log(arguments[0], arguments[1]);
+}
+
+myFunction("1", "Really important data");
+*/
+
+
