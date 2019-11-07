@@ -1,0 +1,14 @@
+How many cars do I have that are built in between 1940 - 1960?
+
+Check file: vehicle.js
+this.year
+Set a loop to detect year 1940 - 1960
+If statement for 1940 - 1960
+
+____________
+
+1) Look at where this year data is stored, found in object.year.
+2) In order to detect cars between 1940 and 1960. We will use: Loop to go through all the cars.
+3) Create a counter that will count the cars that did match.
+4) Write a condition that will check for the year of each car, and see if it's outside of 1960 and 1940.
+5) if it does match year increase counter.
