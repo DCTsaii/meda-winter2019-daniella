@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script
+			  src="https://code.jquery.com/jquery-3.4.1.min.js"
+			  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+              crossorigin="anonymous"></script>
+              
+              <style>
+                  body {
+                      background-color:lavenderblush;
+                  }
+              
+              </style>
+</head>
+<body>
+    <p>I live!</p>
+    <script>
+        // To Test jQuery
+        $(document).ready(() => {
+            // console.log("Testing!");
+
+            let data = "Hello there!";
+
+            // Sends a post request to the URL, data, Callback Function.
+            $.post("http://localhost:3000/updateData", data, () => {
+                console.log("The server has responded!");
+            });
+        });
+    
+    </script>
+</body>
+</html>

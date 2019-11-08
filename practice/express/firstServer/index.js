@@ -24,5 +24,7 @@ console.log("The express server is running on port " + port + "!");
 app.use("/client", express.static("./web_files/")); // http://localhost:8080/client -> Get sent to -> web_file folder
 // app.use(/profile", express.static("user/"));
 
+// test in the browser, type: http://localhost:8080/client <-- client because in the app.use("/client"), 8080 because the port is 8080 in this file. Check line 16 for reference. 
 
-app.use("/myProject", express.static("../../../projects/hobby"));
+
+app.use("/my_project", express.static("../../../.././meda-fall2019-daniella/projects/hobby"));
