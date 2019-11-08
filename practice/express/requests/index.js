@@ -18,10 +18,22 @@ app.use("/", express.static("client/"));
 // app.post("/name of the root", request, response)
 app.post("/updateData", (request, response) => {
 
-    console.log(request.body);
+    // create a let variable if you're confused about request.body.message example bellow:
+    let objectFromRequest = request.body;
+    console.log(objectFromRequest.message);
+
+    let text = request.body.message; // this is required to send data
 
     console.log("We received a request for updateData");
-    response.sendStatus(200); // 200 is a HTTP status
+
+    let data = {
+        text: "Thank you for your message"
+    }
+    response.send(data);
+
+    // response.sendStatus is only used if everything is okay
+    // response.sendStatus(200); 
+    // 200 is a HTTP status
 
 });
 

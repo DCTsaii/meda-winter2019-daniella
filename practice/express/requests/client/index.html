@@ -22,12 +22,16 @@
         // To Test jQuery
         $(document).ready(() => {
             // console.log("Testing!");
-
-            let data = "Hello there!";
+            
+            // How to write a object
+            let data = {
+                message: "Hello there!"
+            }; // attach .message in console.log.body.message in index.js file 
 
             // Sends a post request to the URL, data, Callback Function.
-            $.post("http://localhost:3000/updateData", data, () => {
+            $.post("http://localhost:3000/updateData", data, (dataFromServer) => {
                 console.log("The server has responded!");
+                console.log(dataFromServer); // sending data from the server to the browser
             });
         });
     
