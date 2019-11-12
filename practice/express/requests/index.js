@@ -1,3 +1,4 @@
+const fs = require("fs");
 // To create a server file
 // TEMPLATE START 
 const express = require("express"); 
@@ -25,11 +26,37 @@ app.post("/updateData", (request, response) => { // Is for responding to any hos
 
     // create a let variable if you're confused about request.body.message example bellow:
     let objectFromRequest = request.body; // Object from Request is something that came outside.
-    console.log(objectFromRequest.message);
+    console.log(objectFromRequest);
 
-    let text = request.body.message; // this is required to send data
+    // let text = request.body.message; // this is required to send data
+    // console.log("We received a request for updateData: " + text);
 
-    console.log("We received a request for updateData: " + text);
+
+    let filename = "commentHistory.json";
+
+    // fs.existSync will check if the file exist, if it exist it will turn true and if it doesn't exist it will turn false.
+    if (fs.existsSync(filename)){
+
+        let comments = fs.readFileSync(filename, "utf8"); // This is an object
+
+        comments = JSON.parse(comments);
+
+        comments.commentsArray.push(objectFromRequest);
+
+        comments = JSON.stringify(comments);
+
+        fs.writeFileSync(filename, comments, "utf8");
+        console.log("New Comment Saved to Hard Drive!");
+    } else {
+        let comments = {commentsArray:[objectFromRequest]};
+
+        comments = JSON.stringify(comments);
+
+        fs.writeFileSync(filename, comments, "utf8");
+        console.log("Note: No Save File Detected, creating New File. New Comment Saved to Hard Drive!");
+    }
+
+    // Example of the code above {commentArray: []}
 
     // If you don't want to send any data back, you can use .sendStatus() You can only use sendStatus or send once to fulfill front-end request.
     // response.sendStatus(200);
