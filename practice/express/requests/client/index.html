@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>Submit Your Comment!</title>
 
     <script
 			  src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -13,26 +13,70 @@
                   body {
                       background-color:lavenderblush;
                   }
+
+                  h1 {
+                      text-align: center;
+                  }
               
               </style>
 </head>
 <body>
-    <p>I live!</p>
+
+    <h1>Comment Submission Form</h1>
+    <h2>Instructions</h2>
+    <ol>
+        <li>Fill in the form!</li>
+        <li>Press the Submit Button.</li>
+    </ol>
+
+    <form id="commentSubmission">
+         <!-- <form action="#"> --> 
+        <label for="fname">First Name</label><br />
+        <input name="fname" id="fname" type="text" /><br />
+        <label for="lname">Last Name</label><br />
+        <input name="lname" id="lname" type="text" /><br />
+        <label for="email">eMail</label> <!-- eBook --><br />
+        <input name="email" id="email" type="email" /><br />
+        <label for="age">Age</label><br />
+        <input name="age" id="age" type="number" /><br />
+        <label for="comment">You Comment</label><br />
+        <textarea cols="80" rows="20" id="comment"></textarea><br />
+    </form>
+        <input form="commentSubmission" type="reset" value="Reset" />
+        <button id="submit">Submit</button>
+
+    
+
     <script>
         // To Test jQuery
         $(document).ready(() => {
             // console.log("Testing!");
-            
-            // How to write a object
-            let data = {
-                message: "Hello there!"
-            }; // attach .message in console.log.body.message in index.js file 
 
-            // Sends a post request to the URL, data, Callback Function.
-            $.post("http://localhost:3000/updateData", data, (dataFromServer) => {
-                console.log("The server has responded!");
+            // To add the Submit Button in the jQuery
+            $("#submit").click(() => {
+                // This listens to the "Submit" button, and the user presses on it to confirm they are done and would like to submit to the server.
+                
+                // To grab a value from form using jQuery
+                // let firstName = $("#fname").val(); // .val only works for forms
+
+                // How to write a object
+                let data = {
+                  message: $("#comment").val(),
+                  firstName: $("#fname").val(),
+                  lastName: $("#lname").val(),
+                  email: $("#email").val(),
+                  age: $("#age").val(),
+                }; // attach .message in console.log.body.message in index.js file 
+
+               // Sends a post request to the URL, data, Callback Function.
+                $.post("http://localhost:3000/updateData", data, (dataFromServer) => {
+                // console.log("The server has responded!");
                 console.log(dataFromServer); // sending data from the server to the browser
+                });
+
+                
             });
+
         });
     
     </script>
