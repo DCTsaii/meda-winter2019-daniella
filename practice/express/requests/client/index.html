@@ -17,7 +17,15 @@
     </style>
 </head>
 <body>
-    
+    <div id="comment-section">
+        <h1>Comments Section</h1>
+        <ul id="comments">
+
+        </ul>
+    </div>
+
+
+ <div id="comment-submission">
     <h1>Comment Submission Form</h1>
     <h2>Instructions</h2>
     <ol>
@@ -39,6 +47,7 @@
 
     <input form="commentSubmission" type="reset" value="Reset" />
     <button id="submit">Submit</button>
+ </div>
     
 
     <script>
@@ -52,6 +61,9 @@
 
                 // To grab a value from form using jQuery
                 // let firstName = $("#fname").val(); // .val only works for forms
+
+                // Add timestamp in the future by using:
+                // Date.prototype.toLocaleDateString();
 
                 // How to write a object
                 let data = {
@@ -68,7 +80,20 @@
                     console.log("The server has responded!");
 
                     $.post("http://localhost:3000/loadComments", {}, (commentsReceived) => {
-                        console.log(commentsReceived.commentsArray[1].fname);
+                        // console.log(commentsReceived.commentsArray[1].firstName);
+
+
+                        // For LOOP to display all the comments
+                        let cArray = commentsReceived.commentsArray // created a let and store commentsReceived.commentsArray so you don't have to keep typing it.
+
+                        for(let i = 0; i < cArray.length; i++){
+
+                            let commentString = "<li>" + cArray[i].message + " _ " + cArray[i].firstName + "</li>";
+                            $("#comments").append(commentString);
+
+                        }
+
+                        
 
                     });
 
