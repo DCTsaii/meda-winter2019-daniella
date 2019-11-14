@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <title>Submit your Comment!</title>
 
+    <!-- jQuery CDN means you need internet in order for this to work START -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <!-- jQuery CDN means you need internet in order for this to work END -->
 
     <style>
         body {
@@ -17,6 +19,7 @@
     </style>
 </head>
 <body>
+    <!-- The comments section on the webpage. START -->
     <div id="comment-section">
         <h1>Comments Section</h1>
         <ul id="comments">
@@ -24,7 +27,9 @@
         </ul>
     </div>
 
+    <!-- The comments section on the webpage. END -->
 
+    <!-- The comment submission section START -->
  <div id="comment-submission">
     <h1>Comment Submission Form</h1>
     <h2>Instructions</h2>
@@ -32,6 +37,8 @@
         <li>Fill in the form.</li>
         <li>Press the Submit button.</li>
     </ol>
+
+    <!-- Form for accepting comments. NEEDS SANITIZATION ON FRONT AND BACK -->
     <form id="commentSubmission">
         <label for="fname">First Name</label><br />
         <input name="fname" id="fname" type="text" /><br />
@@ -48,13 +55,19 @@
     <input form="commentSubmission" type="reset" value="Reset" />
     <button id="submit">Submit</button>
  </div>
-    
 
+ <!-- The comment submission section END -->
+    
     <script>
+        // All code that RUNS must be written in the document ready function.
         // To Test jQuery
         $(document).ready(() => {
             // console.log("Testing!");
+ 
+            // Update the list of comments.
+            updateCommentsList();
             
+            // Attach a listener to the Submit button...
             // To add the Submit Button in the jQuery
             $("#submit").click(() => {
                 // This listens to the "Submit" button, and the user presses on it to confirm they are done and would like to submit to the server.
@@ -65,6 +78,7 @@
                 // Add timestamp in the future by using:
                 // Date.prototype.toLocaleDateString();
 
+                // Build the object that we will send to the backend. Agree with the backend on how this object must be formatted.
                 // How to write a object
                 let data = {
                     message: $("#comment").val(),
@@ -77,36 +91,39 @@
                 // Sends a post request to the URL described. Arguments in order: URL, data, Callback Function.
                 // Sends a post request to the URL, data, response Callback Function.
                 $.post("http://localhost:3000/submitComment", data, () => {
-                    console.log("The server has responded!");
-
-                    $.post("http://localhost:3000/loadComments", {}, (commentsReceived) => {
-                        // console.log(commentsReceived.commentsArray[1].firstName);
-
-
-                        // For LOOP to display all the comments
-                        let cArray = commentsReceived.commentsArray // created a let and store commentsReceived.commentsArray so you don't have to keep typing it.
-
-                        for(let i = 0; i < cArray.length; i++){
-
-                            let commentString = "<li>" + cArray[i].message + " _ " + cArray[i].firstName + "</li>";
-                            $("#comments").append(commentString);
-
-                        }
-
-                        
-
-                    });
-
+                    // console.log("The server has responded!");
+                    // Update the list of comments.
+                    updateCommentsList();
                     // console.log(dataFromServer); // sending data from the server to the browser
-
                 });
 
 
             });
 
-        
-
         });
+        // Defining the function that will update our list of comments
+        function updateCommentsList(){
+            // Send a request to get ALL comments. We use post but we send an empty object.
+            $.post("http://localhost:3000/loadComments", {}, (commentsReceived) => {
+                // console.log(commentsReceived.commentsArray[1].firstName);
+
+                // Clear out any existing comments from the comments list.
+                $("#comments").empty(); // To empty previous comments
+
+                // Create a variable that "renames" the comments array as cArray.
+                // For LOOP to display all the comments
+                let cArray = commentsReceived.commentsArray // created a let and store commentsReceived.commentsArray so you don't have to keep typing it.
+
+                // Loop through each object inside of the comments array (cArry)
+                for(let i = 0; i < cArray.length; i++){
+                    // For each object, build a string that looks like an HTML il element.
+                   let commentString = "<li>" + cArray[i].message + " - " + cArray[i].firstName + "</li>";
+                   // Add it to the HTML ul element that has the comments id.
+                   $("#comments").append(commentString);
+                }
+            });
+
+        }
     </script>
 </body>
 </html>
