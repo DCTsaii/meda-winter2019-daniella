@@ -4,8 +4,24 @@ let data = fs.readFileSync("2018entries.json", "utf8"); // Store fs.readFileSync
 
 data = JSON.parse(data); // convert the variable/let data into JSON file
 
+dataObjects = new Array();
+
+for (let i = 0; i < data.length; i++){
+    dataObjects.push(stringToObject(data[i]));
+}
+
 // Question 1
 console.log("What month had the most evictions?");
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -42,7 +58,7 @@ class EvictionNotice {
     }
 }
 
-console.log(stringToObject(data.data[1000])); // data.data = first is the data file, second is the key inside the data file.
+// stringToObject(data.data[1000]); // data.data = first is the data file, second is the key inside the data file.
 
 function stringToObject(string){
     // Split up the entry string into its individual parts.
