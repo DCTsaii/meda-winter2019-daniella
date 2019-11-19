@@ -26,17 +26,11 @@ let headings = dataArray.shift();
 
 /*
 const singleEntry = dataArray[1900];
-
 const singleEntryArray = singleEntry.split(","); 
-
 console.log(singleEntryArray[5]); // index of the year
-
 const entryDate = singleEntryArray[5].split("/");
-
 console.log(entryDate); // to get the full date
-
 console.log(entryDate[2]); // index [2] to get the year 
-
 if ("2018" == entryDate[2]){
     console.log("This is an entry for 2018.");
 }
@@ -45,6 +39,11 @@ if ("2018" == entryDate[2]){
 
 // Counter for the amount of 2018 entries we found.
 let total = 0;
+
+let json2018Data = {
+    headings: headings,
+    data: []
+};
 
 // Loop through all the entries of the dataset (not including headings, and last empty line).
 for (let i = 0; i < dataArray.length - 1; i++){
@@ -57,7 +56,10 @@ for (let i = 0; i < dataArray.length - 1; i++){
     if (pass === true){
         // console.log("The line entry " + i + " is from the year 2018!");
         total++; // adding a 1 to the counter 
-        // If we encounter an issue, tell us about it.
+
+        json2018Data.data.push(dataArray[i]); // To add data inside the data object line 45.
+
+    // If we encounter an issue, tell us about it.
     } else if (pass === 1){
         console.log("The line " + (i + 1) + " has issues! Please check.");
         console.log(dataArray[i]);
@@ -67,9 +69,14 @@ for (let i = 0; i < dataArray.length - 1; i++){
 }
 
 // Finally console log the total amount of entries that matched 2018.
-console.log(total);
+// console.log(json2018Data);
 
 // console.log("The line entry " + 2 + " is from the year 2018: " + is2018(dataArray[22]));
+
+let jsonString = JSON.stringify(json2018Data); // to stringify the JSON file in order to create a writeFileSync.
+
+fs.writeFileSync("2018entries.json", jsonString, "utf8");
+console.log("File was written!");
 
 
 
