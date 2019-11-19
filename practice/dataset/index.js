@@ -57,6 +57,7 @@ for (let i = 0; i < dataArray.length - 1; i++){
         // console.log("The line entry " + i + " is from the year 2018!");
         total++; // adding a 1 to the counter 
 
+        // Grab current line and add it to JSON object array.
         json2018Data.data.push(dataArray[i]); // To add data inside the data object line 45.
 
     // If we encounter an issue, tell us about it.
@@ -73,8 +74,10 @@ for (let i = 0; i < dataArray.length - 1; i++){
 
 // console.log("The line entry " + 2 + " is from the year 2018: " + is2018(dataArray[22]));
 
+// Convert JSON object into JSON string.
 let jsonString = JSON.stringify(json2018Data); // to stringify the JSON file in order to create a writeFileSync.
 
+// Write JSON string to file.
 fs.writeFileSync("2018entries.json", jsonString, "utf8");
 console.log("File was written!");
 
