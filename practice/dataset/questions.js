@@ -72,6 +72,7 @@ for(let i = 0; i < dataObjects.length; i++){
     }
 }
 
+console.log(months);
 
 
 
