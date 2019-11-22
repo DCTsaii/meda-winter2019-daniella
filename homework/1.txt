@@ -1,0 +1,9 @@
+Eviction ID,Address,City,State,Eviction Notice Source Zipcode,File Date,Non Payment,Breach,Nuisance,Illegal Use,Failure to Sign Renewal,Access Denial,Unapproved Subtenant,Owner Move In,Demolition,Capital Improvement,Substantial Rehab,Ellis Act WithDrawal,Condo Conversion,Roommate Same Unit,Other Cause,Late Payments,Lead Remediation,Development,Good Samaritan Ends,Constraints Date,Supervisor District,Neighborhoods - Analysis Boundaries,Location
+
+-How many eviction notices were placed by outside sources of San Francisco?
+
+
+-Which zip code had the most evictions.(Use Neighborhood - Analysis boundary)?
+-What month had the most evictions?
+-What % of evictions happened because of Ellis Act and Condo Conversion?
+
