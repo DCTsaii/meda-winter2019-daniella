@@ -29,7 +29,7 @@ for (let i = 0; i < evictionDataMasterObject.data.length; i++){
 }
 
 
-// Question 1 START 
+// Question 1 START
 console.log("What month had the most evictions?");
 
 
@@ -42,22 +42,22 @@ for(let i = 0; i < dataObjectsArray.length; i++){
     switch(dataObjectsArray[i].month){
         case "01":
             months[0]++;
-            break; 
+            break;
         case "02":
             months[1]++;
             break;
         case "03":
             months[2]++;
-            break; 
+            break;
         case "04":
             months[3]++;
-            break; 
+            break;
         case "05":
             months[4]++;
             break;
         case "06":
             months[5]++;
-            break; 
+            break;
         case "07":
             months[6]++;
             break;
@@ -66,17 +66,17 @@ for(let i = 0; i < dataObjectsArray.length; i++){
             break;
         case "09":
             months[8]++;
-            break; 
+            break;
         case "10":
             months[9]++;
             break;
         case "11":
             months[10]++;
-            break; 
+            break;
         case "12":
             months[11]++;
             break;
-        
+
     }
 }
 
@@ -100,7 +100,7 @@ for (let i = 0; i < months.length; i++){
 console.log("The month with the highest evictions for 2018 was month " + (highestMonthIndex + 1) + ", with a total of " + highestValue + " evictions.");
 // Question 1 END
 
-// Question 2 START 
+// Question 2 START
 console.log("How many evictions happened because of Ellis Act and Condo Conversion for the year 2018?");
 
 let ellisTotal = 0;
@@ -111,7 +111,7 @@ let bothTotal = 0; // Evicted because of BOTH Ellis Act and Condo Conversion
 for (let i = 0; i < dataObjectsArray.length; i++){
 
   let currentObject = dataObjectsArray[i];
-       
+
     if(currentObject.ellisAct === "true"){
         ellisTotal++;
         masterTotal++;
@@ -124,11 +124,11 @@ for (let i = 0; i < dataObjectsArray.length; i++){
     }
 }
 
-// The ${} in this console.log is string literal. 
+// The ${} in this console.log is string literal.
 console.log(`
-   Because of Ellis: ${ellisTotal}; 
-   Because of Condo Conversion: ${condoTotal}; 
-   Total because of either: ${masterTotal}; 
+   Because of Ellis: ${ellisTotal};
+   Because of Condo Conversion: ${condoTotal};
+   Total because of either: ${masterTotal};
    Because of both: ${bothTotal};
 `);
 
@@ -145,10 +145,27 @@ zipCodes = zipCodes.concat("94119 94120 94125 94126 94140 94141 94142 94146 9414
 
 zipCodes = zipCodes.concat("94137 94139 94144 94145 94151 94160 94161 94163 94177".split(" "));
 
-console.log(zipCodes);
+let highValue = 0;
+let mostZipCode;
 
+for (let i = 0; i < dataObjectsArray.length; i++) {
 
+  let currentZipCode = dataObjectsArray[1].zip;
 
+  if(zipCodes[currentZipCode] === undefined){
+
+    zipCodes[currentZipCode] = 1;
+  }else{
+    zipCodes[currentZipCode] += 1;
+  } if(zipCodes[currentZipCode] > highValue){
+
+    highValue = zipCodes[currentZipCode];
+
+    mostZipCode = currentZipCode
+  }
+}
+
+console.log("The zip code with most evictions for 2018 is " + mostZipCode);
 
 
 
@@ -194,4 +211,3 @@ function stringToObject(string){
     // Return new object to call location.
     return evictionObject;
 }
-
