@@ -33,13 +33,19 @@ mongoose.Promise = global.Promise;
 
 let Schema = mongoose.Schema;
 
+// Customize our Schema and name it practiceSchema
 let practiceSchema = new Schema({
     note: String,
     old: Boolean,
     timesUpdated: Number
 });
 
+// Create a new Model that has the Schema and the collections name information.
 let practiceModel = new mongoose.model("myfirstcollections", practiceSchema);
+
+/* Commenting it out so it doesn't save another entry while creating read Document
+
+// MongoDB Write/Save START
 
 let newEntry = new practiceModel({
     note: "This is my second note on the database",
@@ -55,3 +61,33 @@ newEntry.save((error) => {
     }
     
 });
+// MongoDB Write/Save END
+
+*/
+
+// MongoDB READ START
+// An object with the criteria to search the databse with.
+
+/* Searching for a SPECIFIC criteria in the property entries
+ let searchCriteria = {
+    timesUpdated: {$lt: 110} // search for entries timesUpdated less than 110
+ };
+ */
+
+ // To search for ANY criteria in the property entries
+ let searchCriteria = {
+    
+ };
+
+ // Actually search the database.
+practiceModel.find(searchCriteria, (error, results) => {
+    // If error, then
+    if(error){
+        // ... Tells us about it.
+        console.log("Something went wrong!" + error);
+    }else{
+        // Otherwise console log the entries found.
+        console.log(results);
+    }
+});
+// MongoDB READ END
