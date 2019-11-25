@@ -66,9 +66,10 @@ newEntry.save((error) => {
 */
 
 // MongoDB READ START
-// An object with the criteria to search the databse with.
 
-/* Searching for a SPECIFIC criteria in the property entries
+/*
+// An object with the criteria to search the database with.
+// Searching for a SPECIFIC criteria in the property entries
  let searchCriteria = {
     timesUpdated: {$lt: 110} // search for entries timesUpdated less than 110
  };
@@ -91,3 +92,34 @@ practiceModel.find(searchCriteria, (error, results) => {
     }
 });
 // MongoDB READ END
+
+// Create a variable to store the entries you want to update
+let dataToUpdate = {
+    note: "This is an updated note on the database",
+    old: true // 
+
+};
+
+// MongoDB UPDATE START
+// 5ddc202a609ae82ff71a3d8d is the ObjectId from mongodb 
+practiceModel.findByIdAndUpdate("5ddc202a609ae82ff71a3d8d", dataToUpdate, (error, results) => {
+    if(error){
+        console.log("Something happened!" + error);
+    }else{
+        console.log(results);
+    }
+}); 
+// MongoDB UPDATE END
+
+let dataToDelete = {
+    old: true
+};
+// MongoDB DELETE START
+practiceModel.findByIdAndDelete("5ddc22138cb967366198b878", dataToDelete, (error, results) => {
+    if(error){
+        console.log("Something happened!" + error);
+    }else{
+        console.log(results);
+    }
+});
+// MongoDB DELETE END
