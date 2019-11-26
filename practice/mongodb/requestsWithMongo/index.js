@@ -1,5 +1,8 @@
 // Include into our code, the FS package (builtin)
 const fs = require("fs");
+// Includes into our code, the Mongoose.js package.
+const mongoose = require("mongoose");
+
 // To create a server file
 // TEMPLATE START
 // Includes into our code, the Express.js, provided by NPM.
@@ -19,6 +22,43 @@ http.listen(port); // to tell HTTP which port to listen to
 console.log("Express server running on port " + port);
 // TEMPLATE END
 
+// URL to access our MongoDB database.
+const dbConnect = "mongodb+srv://commentsProjectUser:Mnap1234@clusterpractice-xz0iz.mongodb.net/commentsproject?retryWrites=true&w=majority";
+
+// Additional options when connecting to MongoDB.
+const options = {
+    useNewUrlParser: true,
+    useFindAndModify: false,
+    useUnifiedTopology: true
+};
+// Actually connect to MongoDB Atlas.
+mongoose.connect(dbConnect, options, (error) => {
+    if(error){
+        console.log(error);
+    }else{
+        console.log("Successfully connected to MongoDB Atlas!");
+    }
+});
+// Link up MongoDB errors with the console, and link up the definition of Promises to Mongoose.
+let db = mongoose.connection;
+db.on("error", console.error.bind(console, "MongoDB error"));
+mongoose.Promise = global.Promise;
+
+// Building MongoDB Schema.
+let Schema = mongoose.Schema;
+let commentsSchema = new Schema({
+    message: String,
+    firstName: String,
+    lastName: String,
+    email: String,
+    age: Number,
+    timestamp: Date
+});
+// Create a Model for the comments collections using the comments Schema.
+let commentsModel = new mongoose.model("comments", commentsSchema);
+
+// Signifying the Developer that Express.js is now running.
+// console.log("Express server running on port " + port);
 // Needed to read data sent through POST request.
 app.use(bodyParser.json()); // convert to JSON automatically
 // Gives Body Parser specific options to run off of.
@@ -50,6 +90,19 @@ app.post("/submitComment", (request, response) => { // Is for responding to any 
     // let text = objectFromRequest.message;
     // console.log("We received a request for/submitComment: " + text);
 
+    objectFromRequest.age = parseInt(objectFromRequest.age);
+    objectFromRequest.timestamp = new Date();
+
+    let newComment = new commentsModel(objectFromRequest);
+
+    newComment.save((error, respond) => {
+        if(error){
+            console.log(error);
+        }else{
+            console.log("Saved a new comment to the database!");
+        }
+    });
+;
     // fs.existSync will check if the file exist, if it exist it will turn true and if it doesn't exist it will turn false.
     // If the file exists do...
     if (fs.existsSync(filename)) {
@@ -101,6 +154,18 @@ app.post("/submitComment", (request, response) => { // Is for responding to any 
 // A second HTTP Post Handler called /loadComments
 app.post("/loadComments", (request, response) => {
 
+    commentsModel.find({}, (error, results) => {
+        if(error){
+            console.log(error);
+        }else{
+            let objectToSend = {
+                commentsArray: results
+            }
+            response.send(objectToSend);
+        }
+    });
+
+    /* JSON File
     // Check if the JSON file exists...
     if (fs.existsSync(filename)) {
         
@@ -114,5 +179,6 @@ app.post("/loadComments", (request, response) => {
         // ...If it doesn't exist, then send an error 500 to the requester.
         response.sendStatus(500); // 500 is Internal server error
     }
+    */
 
 });
