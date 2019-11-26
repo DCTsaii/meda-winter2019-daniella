@@ -1,5 +1,6 @@
 // Include into our code, the FS package (builtin)
-const fs = require("fs");
+// const fs = require("fs"); DON'T NEED THIS BECAUSE WE ARE USING MONGOOSE
+
 // Includes into our code, the Mongoose.js package.
 const mongoose = require("mongoose");
 
@@ -67,7 +68,7 @@ app.use(bodyParser.urlencoded({extended: false})); // extended: false is an opti
 // Custom Code for Express.js after this line.
 
 // Variable to make sure the file name is the same every time.
-let filename = "commentHistory.json";
+// let filename = "commentHistory.json"; DON'T NEED THIS BECAUSE WE ARE USING MONGOOSE
 
 // Routes
 // First Argument is the route name, second argument is directory to load when someone requests the route name.
@@ -90,6 +91,7 @@ app.post("/submitComment", (request, response) => { // Is for responding to any 
     // let text = objectFromRequest.message;
     // console.log("We received a request for/submitComment: " + text);
 
+    // Modify the object received from the front end to meet Schema requirements
     objectFromRequest.age = parseInt(objectFromRequest.age);
     objectFromRequest.timestamp = new Date();
 
@@ -105,6 +107,8 @@ app.post("/submitComment", (request, response) => { // Is for responding to any 
 ;
     // fs.existSync will check if the file exist, if it exist it will turn true and if it doesn't exist it will turn false.
     // If the file exists do...
+
+    /* DON'T NEED THIS BECAUSE WE ARE USING MONGOOSE
     if (fs.existsSync(filename)) {
         // ...read the file and store the contents in the variable comments...
         let comments = fs.readFileSync(filename, "utf8");
@@ -128,7 +132,8 @@ app.post("/submitComment", (request, response) => { // Is for responding to any 
         // ...Finally save JSON string to new File.
         fs.writeFileSync(filename, comments, "utf8");
         console.log("Note: No Save File Detected, creating New File. New Comment Saved to Hard Drive!");
-    }
+    } // DON'T NEED THIS BECAUSE WE ARE USING MONGOOSE
+    */
 
     // Example of the code above {commentsArray: []}
 
@@ -154,18 +159,21 @@ app.post("/submitComment", (request, response) => { // Is for responding to any 
 // A second HTTP Post Handler called /loadComments
 app.post("/loadComments", (request, response) => {
 
+    // Read all the comments from MongoDB Atlas.
     commentsModel.find({}, (error, results) => {
         if(error){
+            // If error, tell me about it.
             console.log(error);
         }else{
+            // Build an object that the front-end expects...
             let objectToSend = {
                 commentsArray: results
-            }
+            } // ...and send it.
             response.send(objectToSend);
         }
     });
 
-    /* JSON File
+    /* DON'T NEED THIS BECAUSE WE ARE USING MONGOOSE
     // Check if the JSON file exists...
     if (fs.existsSync(filename)) {
         
@@ -178,7 +186,7 @@ app.post("/loadComments", (request, response) => {
     } else {
         // ...If it doesn't exist, then send an error 500 to the requester.
         response.sendStatus(500); // 500 is Internal server error
-    }
+    } // DON'T NEED THIS BECAUSE WE ARE USING MONGOOSE
     */
 
 });

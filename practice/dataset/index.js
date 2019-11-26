@@ -40,7 +40,7 @@ if ("2018" == entryDate[2]){
 // Counter for the amount of 2018 entries we found.
 let total = 0;
 
-let json2018Data = {
+let json2017Data = {
     headings: headings,
     data: []
 };
@@ -49,7 +49,7 @@ let json2018Data = {
 for (let i = 0; i < dataArray.length - 1; i++){
 
     // Test the entry using the is2018 function
-    let pass = is2018(dataArray[i]); // to minimize the amount of time to run, store in a variable.
+    let pass = is2017(dataArray[i]); // to minimize the amount of time to run, store in a variable.
 
 
     // If pass is true, then add a 1 to counter.
@@ -58,7 +58,7 @@ for (let i = 0; i < dataArray.length - 1; i++){
         total++; // adding a 1 to the counter 
 
         // Grab current line and add it to JSON object array.
-        json2018Data.data.push(dataArray[i]); // To add data inside the data object line 45.
+        json2017Data.data.push(dataArray[i]); // To add data inside the data object line 45.
 
     // If we encounter an issue, tell us about it.
     } else if (pass === 1){
@@ -75,10 +75,10 @@ for (let i = 0; i < dataArray.length - 1; i++){
 // console.log("The line entry " + 2 + " is from the year 2018: " + is2018(dataArray[22]));
 
 // Convert JSON object into JSON string.
-let jsonString = JSON.stringify(json2018Data); // to stringify the JSON file in order to create a writeFileSync.
+let jsonString = JSON.stringify(json2017Data); // to stringify the JSON file in order to create a writeFileSync.
 
 // Write JSON string to file.
-fs.writeFileSync("2018entries.json", jsonString, "utf8");
+fs.writeFileSync("2017entries.json", jsonString, "utf8");
 console.log("File was written!");
 
 
@@ -86,7 +86,7 @@ console.log("File was written!");
 
 
 // This accepts a string only, returns true, false, or 1 if issue.
-function is2018(entry){ 
+function is2017(entry){ 
     // Create an array that splits up the individual columns of entry.
      const singleEntryArray = entry.split(","); 
 
