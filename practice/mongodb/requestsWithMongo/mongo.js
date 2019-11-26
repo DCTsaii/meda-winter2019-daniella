@@ -1,4 +1,5 @@
 // Use the mongoose package so we can talk to MongoDB Atlas.
+// Mongoose is the middle man software for JavaScript and MongoDB
 const mongoose = require("mongoose");
 
 // The credentials and location to log into the MongoDB account. This should normally be somewhere else that's more secure.
@@ -76,12 +77,11 @@ newEntry.save((error) => {
  */
 
  // To search for ANY criteria in the property entries
- let searchCriteria = {
-    
- };
+ let searchCriteria = {}; // empty brackets
 
  // Actually search the database.
-practiceModel.find(searchCriteria, (error, results) => {
+ // To read we use the find method
+practiceModel.find(searchCriteria, (error, results) => { // the order is error will ALWAYS come FIRST.
     // If error, then
     if(error){
         // ... Tells us about it.
@@ -94,6 +94,7 @@ practiceModel.find(searchCriteria, (error, results) => {
 // MongoDB READ END
 
 // Create a variable to store the entries you want to update
+// Data to update the targeted entry with the right ID.
 let dataToUpdate = {
     note: "This is an updated note on the database",
     old: true // 
@@ -102,6 +103,7 @@ let dataToUpdate = {
 
 // MongoDB UPDATE START
 // 5ddc202a609ae82ff71a3d8d is the ObjectId from mongodb 
+// Submit the request to MongoDB with the proper id and data to update.
 practiceModel.findByIdAndUpdate("5ddc202a609ae82ff71a3d8d", dataToUpdate, (error, results) => {
     if(error){
         console.log("Something happened!" + error);
@@ -111,11 +113,9 @@ practiceModel.findByIdAndUpdate("5ddc202a609ae82ff71a3d8d", dataToUpdate, (error
 }); 
 // MongoDB UPDATE END
 
-let dataToDelete = {
-    old: true
-};
 // MongoDB DELETE START
-practiceModel.findByIdAndDelete("5ddc22138cb967366198b878", dataToDelete, (error, results) => {
+// First Argument is the id of the entry to delete, second argument is the callback function that runs when MongoDB with success or failure.
+practiceModel.findByIdAndDelete("5ddc22138cb967366198b878", (error, results) => {
     if(error){
         console.log("Something happened!" + error);
     }else{
