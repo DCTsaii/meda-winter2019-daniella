@@ -33,20 +33,61 @@ const paragraph = React.createElement(
     "This is a paragraph!"
 );
 
+function About(props){
+    return(
+        <p>This is officially a React Function Component</p>
+    );
+}
+
+class MyClass{}
+
+function H1Generator(props){
+    let temp = props.text;
+    return(
+        <h1 className="myCSSClass">{props.text}</h1>
+    );
+}
+
+// Arrow function ALWAYS WRITE IN ARROW FUNCTION
+const H2Generator = (props) => {
+    return(<h2>{props.something}</h2>);
+}
+
+// Class component 
+class Counter extends React.Component{
+    constructor(){
+        super(); // super runs the constructor of the class that stands
+        // Review special way tp update states for Class Components.
+        this.state = {
+            score: 0
+        };
+    }
+
+    render(props){
+        return(<p>The current score is: {this.props.tempScore}</p>);
+    }
+}
+
+/* 
 const paragraph2 = React.createElement(
     "p",
     null,
     "This is a second paragraph."
 );
+*/
 
 const idOfDiv = "test";
 // JSX version of createElements();
 const app = (
     // To "interpolate" JavaScript, use curly braces.
     <div id={idOfDiv}>
+        <About tempScore={3}/>
+        <H1Generator text="Hi this is custom text!" />
+        <H2Generator something="Some text" />
+        <H1Generator text="This is some other line!" />
+        <Counter />
         {title}
         {paragraph}
-        {paragraph2}
     </div>
 );
 // Render component to target element.
